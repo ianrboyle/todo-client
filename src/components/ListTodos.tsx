@@ -13,6 +13,7 @@ const ListTodos = () => {
 
   const [todos, setTodos] = useState<IList["todos"]>([])
 
+  //GET TODO FUNCTION
   const getTodos = async () => {
     try {
       await fetch("http://localhost:5000/todos").then(response => {
@@ -21,8 +22,24 @@ const ListTodos = () => {
         console.log(data) 
         setTodos(data)
       })
+    
     } catch (err: any) {
       console.error(err.message)
+    }
+  }
+  // DELETE TODO FUNCTION
+  const deleteTodo = async (id: number) => {
+    try {
+      const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`,{
+        method: "DELETE",
+      })
+      console.log(deleteTodo)
+      setTodos((prevTodos) => {
+        return prevTodos.filter(todo => todo.todo_id !== id)
+      })
+      // window.location.href = "/"
+    } catch (err: any) {
+      console.error(err)
     }
   }
   useEffect(() => {
@@ -30,7 +47,6 @@ const ListTodos = () => {
   }, [])
   console.log("TODOS: ", todos)
   return (<Fragment>
-    <p>Todo List</p>
     <table className="table m-5">
   <thead>
     <tr>
@@ -47,7 +63,7 @@ const ListTodos = () => {
           <th  scope="row">{todo.todo_id}</th>
           <td>{todo.description}</td>
           <td><button className="btn btn-primary">Edit</button></td>
-          <td> <button className="btn btn-danger">Delete</button></td>
+          <td> <button onClick={() => {deleteTodo(todo.todo_id)}} className="btn btn-danger">Delete</button></td>
         </tr>
       )
     })}
