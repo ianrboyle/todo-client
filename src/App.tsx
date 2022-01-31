@@ -1,12 +1,16 @@
-import React from 'react';
-import './App.css';
+import React, {Fragment} from 'react';
+
+import EditTodo from './components/EditTodo';
 import InputTodo from './components/InputTodo';
+import ListTodos from './components/ListTodos';
 
 function App() {
   return (
-    <div className="App">
+    <Fragment>
       <InputTodo />
-    </div>
+      <ListTodos />
+      <EditTodo />
+    </Fragment>
   );
 }
 
