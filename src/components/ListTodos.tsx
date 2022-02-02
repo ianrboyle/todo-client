@@ -1,5 +1,6 @@
-import { json } from "body-parser"
+
 import React, {Fragment, useState, useEffect} from "react"
+import EditTodo from "./EditTodo"
 
 interface IList {
   todos: {
@@ -37,7 +38,6 @@ const ListTodos = () => {
       setTodos((prevTodos) => {
         return prevTodos.filter(todo => todo.todo_id !== id)
       })
-      // window.location.href = "/"
     } catch (err: any) {
       console.error(err)
     }
@@ -62,31 +62,13 @@ const ListTodos = () => {
         <tr key={todo.todo_id}>
           <th  scope="row">{todo.todo_id}</th>
           <td>{todo.description}</td>
-          <td><button className="btn btn-primary">Edit</button></td>
+          <td><EditTodo /></td>
           <td> <button onClick={() => {deleteTodo(todo.todo_id)}} className="btn btn-danger">Delete</button></td>
         </tr>
       )
     })}
-    {/* <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr> */}
-    {/* <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colSpan={2}>Larry the Bird</td>
-      <td>@twitter</td>
-    </tr> */}
   </tbody>
 </table>
-    <button onClick={getTodos}>Get</button>
   </Fragment>)
 }
 
