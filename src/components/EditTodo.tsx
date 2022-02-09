@@ -24,7 +24,10 @@ const EditTodo: React.FC<Props> = ({todo}) => {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setDescription(todo.description)
+    setOpen(false) }
+    ;
   const [description, setDescription] = useState(todo.description)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
