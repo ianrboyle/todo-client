@@ -3,12 +3,13 @@ import React, {Fragment, useState, useEffect} from "react"
 import EditTodo from "./EditTodo"
 
 interface IList {
-  todos: {
-    description: string,
-    todo_id: number,
-  }[]
+  todos: ITodo[]
 }
 
+export interface ITodo {
+  description: string,
+    todo_id: number,
+}
 const ListTodos = () => {
 
 
@@ -62,7 +63,7 @@ const ListTodos = () => {
         <tr key={todo.todo_id}>
           <th  scope="row">{todo.todo_id}</th>
           <td>{todo.description}</td>
-          <td><EditTodo /></td>
+          <td><EditTodo todo={todo}/></td>
           <td> <button onClick={() => {deleteTodo(todo.todo_id)}} className="btn btn-danger">Delete</button></td>
         </tr>
       )
